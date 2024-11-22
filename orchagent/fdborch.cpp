@@ -1441,7 +1441,8 @@ bool FdbOrch::addFdbEntry(const FdbEntry& entry, const string& port_name,
         attrs.push_back(attr);
     }
 
-    if (macUpdate && (oldOrigin == FDB_ORIGIN_VXLAN_ADVERTIZED))
+    if (macUpdate &&
+        ((oldOrigin == FDB_ORIGIN_VXLAN_ADVERTIZED) || (oldOrigin == FDB_ORIGIN_MCLAG_ADVERTIZED))
     {
         if ((fdbData.origin != oldOrigin)
            || ((oldType == "dynamic") && (oldType != fdbData.type)))
